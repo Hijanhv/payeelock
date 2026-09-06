@@ -1,0 +1,24 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Public Sepolia MockUSDC contract address"
+regexes = [
+  '''0x768F42455A2D082E23ceeF7d51e5787C82d67a39''',
+]
+
+[[allowlists]]
+description = "Generated, vendored, local, and submission-only files"
+paths = [
+  '''(^|/)\.git/''',
+  '''(^|/)\.next/''',
+  '''(^|/)\.runtime/''',
+  '''(^|/)\.turbo/''',
+  '''(^|/)\.vercel/''',
+  '''(^|/)\.env\.local$''',
+  '''(^|/)artifacts/.*\.mp4$''',
+  '''(^|/)dist/''',
+  '''(^|/)node_modules/''',
+  '''^packages/contracts/(cache|lib|out)/''',
+  '''^packages/subgraph/(build|generated)/''',
+]
