@@ -1,0 +1,15 @@
+.git/
+.turbo/
+.next/
+.runtime/
+.vercel/
+artifacts/
+packages/contracts/cache/
+packages/contracts/lib/
+packages/contracts/out/
+packages/subgraph/build/
+dist/
+node_modules/
+packages/subgraph/generated/
+tmp/
+*.tsbuildinfo
