@@ -1,0 +1,49 @@
+{
+  "name": "payeelock",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "npm@10.9.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env.local node_modules/turbo/bin/turbo run dev --filter=@payeelock/web",
+    "build": "node --env-file-if-exists=.env.local node_modules/turbo/bin/turbo run build",
+    "start": "node --env-file-if-exists=.env.local node_modules/turbo/bin/turbo run start --filter=@payeelock/web",
+    "repo:check": "tsx tooling/audit-repository.ts",
+    "typecheck": "turbo run typecheck && tsc --noEmit -p tooling/tsconfig.json",
+    "test": "turbo run test --filter=@payeelock/contracts",
+    "contracts:build": "turbo run build --filter=@payeelock/contracts",
+    "test:e2e": "tsx tooling/e2e.ts",
+    "verify": "npm run repo:check && npm run typecheck && npm test && npm run test:e2e && npm run build && npm run format:check",
+    "deploy:sepolia": "node --env-file=.env.local --import tsx tooling/deploy-sepolia.ts",
+    "guardian:status": "node --env-file=.env.local --import tsx tooling/privy-guardian.ts status",
+    "guardian:policy-test": "node --env-file=.env.local --import tsx tooling/privy-guardian.ts deny-probe",
+    "monitor:inspect": "node --env-file=.env.local --import tsx tooling/recovery-monitor.ts",
+    "monitor:execute": "node --env-file=.env.local --import tsx tooling/recovery-monitor.ts --execute",
+    "graph:codegen": "turbo run codegen --filter=@payeelock/subgraph",
+    "graph:build": "turbo run build --filter=@payeelock/subgraph",
+    "graph:deploy": "npm run deploy --workspace=@payeelock/subgraph",
+    "package:submission": "bash tooling/package-submission.sh",
+    "format": "prettier --write apps packages tooling docs deployments README.md AGENTS.md turbo.json tsconfig.json package.json && forge fmt --root packages/contracts",
+    "format:check": "prettier --check apps packages tooling docs deployments README.md AGENTS.md turbo.json tsconfig.json package.json && forge fmt --check --root packages/contracts && bash -n tooling/*.sh"
+  },
+  "dependencies": {
+    "@payeelock/contracts": "0.1.0",
+    "@privy-io/node": "0.34.0",
+    "viem": "2.56.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "prettier": "3.9.6",
+    "tsx": "^4.20.0",
+    "turbo": "2.10.12",
+    "typescript": "^5.9.0"
+  },
+  "type": "module",
+  "overrides": {
+    "ws@^8.0.0": "^8.21.0",
+    "axios@^1.0.0": "^1.18.0"
+  }
+}
