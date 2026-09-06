@@ -1,0 +1,17 @@
+node_modules/
+**/.next/
+.turbo/
+.env*
+!.env.example
+.runtime/
+dist/
+tmp/
+artifacts/
+packages/contracts/out/
+packages/contracts/cache/
+packages/contracts/lib/
+packages/subgraph/build/
+packages/subgraph/generated/
+*.tsbuildinfo
+.DS_Store
+**/.vercel/
