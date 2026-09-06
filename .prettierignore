@@ -1,0 +1,11 @@
+node_modules
+**/.next
+**/next-env.d.ts
+.turbo
+packages/contracts/cache
+packages/contracts/lib
+packages/contracts/out
+packages/contracts/generated/*.abi.ts
+packages/subgraph/build
+packages/subgraph/generated
+.runtime
