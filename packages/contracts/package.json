@@ -1,0 +1,27 @@
+{
+  "name": "@payeelock/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./payeelock-abi": "./generated/payeelock.abi.ts",
+    "./test-resolver-abi": "./generated/test-resolver.abi.ts",
+    "./test-usd-abi": "./generated/test-usd.abi.ts",
+    "./test-support/anvil-proof": "./test-support/anvil-proof.ts",
+    "./test-support/typed-data": "./test-support/typed-data.ts",
+    "./test-support/types": "./test-support/types.ts"
+  },
+  "scripts": {
+    "build": "forge build --root . && tsx ../../tooling/export-abi.ts",
+    "test": "forge test --root . -vv",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "viem": "2.56.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}
