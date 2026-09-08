@@ -1,0 +1,58 @@
+type Supplier @entity(immutable: false) {
+  id: Bytes!
+  node: Bytes!
+  beneficiary: Bytes!
+  recoverySigner: Bytes!
+  resolver: Bytes!
+  epoch: BigInt!
+  frozen: Boolean!
+  registeredAtBlock: BigInt!
+  registeredTransaction: Bytes!
+  invoices: [Invoice!]! @derivedFrom(field: "supplier")
+}
+
+type Invoice @entity(immutable: false) {
+  id: Bytes!
+  supplier: Supplier!
+  total: BigInt!
+  paid: BigInt!
+  beneficiary: Bytes!
+  epoch: BigInt!
+  nonce: BigInt!
+  cancelled: Boolean!
+  approvedAtBlock: BigInt!
+  approvedTransaction: Bytes!
+}
+
+type PayeeLockEvent @entity(immutable: true) {
+  id: Bytes!
+  kind: String!
+  supplierId: Bytes
+  invoiceId: Bytes
+  actor: Bytes!
+  beneficiary: Bytes
+  amount: BigInt
+  epoch: BigInt
+  nonce: BigInt
+  transaction: Bytes!
+  block: BigInt!
+  timestamp: BigInt!
+}
+
+type EnsActivity @entity(immutable: true) {
+  id: Bytes!
+  kind: String!
+  node: Bytes
+  resource: BigInt
+  account: Bytes
+  oldRoles: BigInt
+  newRoles: BigInt
+  coinType: BigInt
+  addressValue: Bytes
+  textKey: String
+  textValue: String
+  transaction: Bytes!
+  actor: Bytes!
+  block: BigInt!
+  timestamp: BigInt!
+}
