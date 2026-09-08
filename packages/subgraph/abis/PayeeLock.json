@@ -1,0 +1,90 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "supplierId", "type": "bytes32" },
+      { "indexed": true, "name": "node", "type": "bytes32" },
+      { "indexed": false, "name": "beneficiary", "type": "address" },
+      { "indexed": false, "name": "recoverySigner", "type": "address" },
+      { "indexed": false, "name": "resolver", "type": "address" }
+    ],
+    "name": "SupplierRegistered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "invoiceId", "type": "bytes32" },
+      { "indexed": true, "name": "supplierId", "type": "bytes32" },
+      { "indexed": false, "name": "total", "type": "uint256" },
+      { "indexed": false, "name": "beneficiary", "type": "address" },
+      { "indexed": false, "name": "epoch", "type": "uint64" }
+    ],
+    "name": "InvoiceApproved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "supplierId", "type": "bytes32" },
+      { "indexed": false, "name": "epoch", "type": "uint64" }
+    ],
+    "name": "SupplierFrozen",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "invoiceId", "type": "bytes32" },
+      { "indexed": false, "name": "fromEpoch", "type": "uint64" },
+      { "indexed": false, "name": "toEpoch", "type": "uint64" },
+      { "indexed": false, "name": "beneficiary", "type": "address" },
+      { "indexed": false, "name": "alreadyPaid", "type": "uint256" }
+    ],
+    "name": "InvoiceMigrated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "supplierId", "type": "bytes32" },
+      { "indexed": false, "name": "epoch", "type": "uint64" },
+      { "indexed": false, "name": "beneficiary", "type": "address" }
+    ],
+    "name": "RecoveryActivated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "invoiceId", "type": "bytes32" },
+      { "indexed": true, "name": "beneficiary", "type": "address" },
+      { "indexed": false, "name": "amount", "type": "uint256" },
+      { "indexed": false, "name": "totalPaid", "type": "uint256" },
+      { "indexed": false, "name": "nonce", "type": "uint64" }
+    ],
+    "name": "InvoicePaid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "name": "invoiceId", "type": "bytes32" },
+      { "indexed": false, "name": "refunded", "type": "uint256" }
+    ],
+    "name": "InvoiceCancelled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{ "indexed": true, "name": "executor", "type": "address" }],
+    "name": "ExecutorChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{ "indexed": true, "name": "guardian", "type": "address" }],
+    "name": "GuardianChanged",
+    "type": "event"
+  }
+]
