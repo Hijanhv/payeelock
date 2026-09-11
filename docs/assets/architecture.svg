@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title description">
+  <title id="title">PayeeLock payment and recovery architecture</title>
+  <desc id="description">ENSv2 separates supplier permissions, The Graph provides indexed evidence, Privy constrains the pause guardian, and the PayeeLock vault requires buyer and supplier approval before unpaid invoices migrate.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#74767d"/></marker>
+    <style>
+      .box{fill:#fff;stroke:#d8d9dd;stroke-width:2}.soft{fill:#f0f0f2;stroke:#c9cacf;stroke-width:2}.dark{fill:#232428;stroke:#232428;stroke-width:2}.title{font:650 21px Manrope,Arial,sans-serif;fill:#202124}.titleLight{font:650 21px Manrope,Arial,sans-serif;fill:#fff}.copy{font:14px Manrope,Arial,sans-serif;fill:#6b6d74}.copyLight{font:14px Manrope,Arial,sans-serif;fill:#d8d8dc}.tag{font:650 12px Manrope,Arial,sans-serif;fill:#5d5f66}.line{fill:none;stroke:#74767d;stroke-width:2;marker-end:url(#arrow)}.dash{fill:none;stroke:#9a9ca2;stroke-width:2;stroke-dasharray:7 7;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="700" rx="28" fill="#f8f8f9"/>
+  <text x="52" y="54" class="tag">PayeeLock architecture</text>
+  <text x="52" y="88" class="title">Recovery changes an obligation state, not an address book entry.</text>
+
+  <rect x="52" y="136" width="242" height="126" rx="14" class="box"/>
+  <text x="78" y="176" class="title">ENSv2</text>
+  <text x="78" y="207" class="copy">Supplier payout record</text>
+  <text x="78" y="230" class="copy">and scoped publisher roles</text>
+
+  <rect x="52" y="302" width="242" height="126" rx="14" class="box"/>
+  <text x="78" y="342" class="title">PayeeLock events</text>
+  <text x="78" y="373" class="copy">Invoices, payments, pause,</text>
+  <text x="78" y="396" class="copy">migration, and settlement</text>
+
+  <rect x="366" y="219" width="212" height="126" rx="14" class="soft"/>
+  <text x="392" y="257" class="tag">Indexed history</text>
+  <text x="392" y="289" class="title">The Graph</text>
+  <text x="392" y="317" class="copy">Review and monitoring</text>
+
+  <rect x="650" y="196" width="232" height="172" rx="16" class="dark"/>
+  <text x="678" y="236" class="copyLight">Explicit conditions</text>
+  <text x="678" y="270" class="titleLight">Recovery monitor</text>
+  <text x="678" y="302" class="copyLight">Confirms current RPC state</text>
+  <text x="678" y="326" class="copyLight">and may request only</text>
+  <text x="678" y="350" class="copyLight">freeze(supplierId)</text>
+
+  <rect x="954" y="219" width="194" height="126" rx="14" class="soft"/>
+  <text x="980" y="259" class="title">Privy policy</text>
+  <text x="980" y="290" class="copy">One chain · one vault</text>
+  <text x="980" y="313" class="copy">one pause function</text>
+
+  <path d="M294 199C333 199 334 252 362 266" class="line"/>
+  <path d="M294 365C333 365 334 316 362 300" class="line"/>
+  <path d="M578 282H646" class="line"/>
+  <path d="M882 282H950" class="line"/>
+
+  <rect x="398" y="456" width="404" height="120" rx="16" class="dark"/>
+  <text x="428" y="495" class="copyLight">Onchain enforcement</text>
+  <text x="428" y="529" class="titleLight">PayeeLock vault</text>
+  <text x="428" y="555" class="copyLight">Beneficiary · epoch · nonce · exact unpaid balance</text>
+
+  <path d="M766 368C766 412 721 430 688 452" class="line"/>
+  <path d="M173 262V514C173 548 236 552 394 522" class="dash"/>
+
+  <rect x="52" y="506" width="250" height="120" rx="14" class="box"/>
+  <text x="78" y="546" class="title">Harbor Systems</text>
+  <text x="78" y="577" class="copy">Signs the new wallet</text>
+  <text x="78" y="600" class="copy">and exact invoice set</text>
+
+  <rect x="898" y="506" width="250" height="120" rx="14" class="box"/>
+  <text x="924" y="546" class="title">Meridian Labs</text>
+  <text x="924" y="577" class="copy">Accepts the same proposal</text>
+  <text x="924" y="600" class="copy">and authorizes payments</text>
+
+  <path d="M302 566H394" class="line"/>
+  <path d="M898 566H806" class="line"/>
+  <rect x="350" y="653" width="500" height="30" rx="15" fill="#e7e7e9"/>
+  <text x="600" y="673" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="13" fill="#34353a">Paid history stays final · only unpaid remainders migrate</text>
+</svg>
