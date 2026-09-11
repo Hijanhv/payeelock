@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title description">
+  <title id="title">PayeeLock verified Sepolia recovery</title>
+  <desc id="description">Seven recorded stages from prefunded invoices through a permission test, guardian pause, bilateral recovery, stale-payment rejection, and final settlement.</desc>
+  <defs>
+    <style>.card{fill:#fff;stroke:#d9d9dd;stroke-width:2}.key{fill:#25262a;stroke:#25262a;stroke-width:2}.num{font:650 11px Manrope,Arial,sans-serif;fill:#676970}.numKey{font:650 11px Manrope,Arial,sans-serif;fill:#cfd0d4}.head{font:650 14px Manrope,Arial,sans-serif;fill:#202124}.headKey{font:650 14px Manrope,Arial,sans-serif;fill:#fff}.copy{font:12px Manrope,Arial,sans-serif;fill:#707279}.copyKey{font:12px Manrope,Arial,sans-serif;fill:#d4d5d8}.route{stroke:#b9bac0;stroke-width:2}.dot{fill:#676970}</style>
+  </defs>
+  <rect width="1200" height="360" rx="28" fill="#f8f8f9"/>
+  <text x="46" y="48" class="num">Verified Sepolia case</text>
+  <text x="46" y="76" class="head">One payable moves from approval to safe recovery.</text>
+  <line x1="78" y1="116" x2="1122" y2="116" class="route"/>
+
+  <g transform="translate(34 87)"><circle cx="44" cy="29" r="7" class="dot"/><rect y="54" width="150" height="154" rx="10" class="card"/><text x="18" y="83" class="num">01</text><text x="18" y="110" class="head">Invoices funded</text><text x="18" y="140" class="copy">$14,000 locked</text><text x="18" y="160" class="copy">before payment</text></g>
+  <g transform="translate(198 87)"><circle cx="44" cy="29" r="7" class="dot"/><rect y="54" width="150" height="154" rx="10" class="card"/><text x="18" y="83" class="num">02</text><text x="18" y="110" class="head">Part paid</text><text x="18" y="140" class="copy">$2,400 reaches</text><text x="18" y="160" class="copy">the old wallet</text></g>
+  <g transform="translate(362 87)"><circle cx="44" cy="29" r="7" class="dot"/><rect y="54" width="150" height="154" rx="10" class="card"/><text x="18" y="83" class="num">03</text><text x="18" y="110" class="head">Permission tested</text><text x="18" y="140" class="copy">Publisher payout</text><text x="18" y="160" class="copy">edit reverts</text></g>
+  <g transform="translate(526 87)"><circle cx="44" cy="29" r="7" class="dot"/><rect y="54" width="150" height="154" rx="10" class="key"/><text x="18" y="83" class="numKey">04</text><text x="18" y="110" class="headKey">Payments paused</text><text x="18" y="140" class="copyKey">Privy permits only</text><text x="18" y="160" class="copyKey">the freeze call</text></g>
+  <g transform="translate(690 87)"><circle cx="44" cy="29" r="7" class="dot"/><rect y="54" width="150" height="154" rx="10" class="card"/><text x="18" y="83" class="num">05</text><text x="18" y="110" class="head">Route recovered</text><text x="18" y="140" class="copy">Harbor signs</text><text x="18" y="160" class="copy">Meridian accepts</text></g>
+  <g transform="translate(854 87)"><circle cx="44" cy="29" r="7" class="dot"/><rect y="54" width="150" height="154" rx="10" class="key"/><text x="18" y="83" class="numKey">06</text><text x="18" y="110" class="headKey">Old job rejected</text><text x="18" y="140" class="copyKey">Stale epoch and</text><text x="18" y="160" class="copyKey">nonce revert</text></g>
+  <g transform="translate(1018 87)"><circle cx="44" cy="29" r="7" class="dot"/><rect y="54" width="150" height="154" rx="10" class="card"/><text x="18" y="83" class="num">07</text><text x="18" y="110" class="head">Remainder settled</text><text x="18" y="140" class="copy">$11,600 reaches</text><text x="18" y="160" class="copy">the new wallet</text></g>
+</svg>
