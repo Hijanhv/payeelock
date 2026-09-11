@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180" role="img" aria-labelledby="title description">
+  <title id="title">PayeeLock</title>
+  <desc id="description">PayeeLock wordmark with a protected payment route.</desc>
+  <rect width="720" height="180" rx="24" fill="#f7f7f3"/>
+  <g transform="translate(48 46)" fill="none" stroke="#171717" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M9 6h38c19 0 30 10 30 25S66 56 47 56H27v27H9z"/>
+    <path d="M27 31h30"/>
+    <path d="M52 56v27h30"/>
+  </g>
+  <circle cx="139" cy="89" r="8" fill="#60626a"/>
+  <path d="M147 89h42" stroke="#60626a" stroke-width="4"/>
+  <text x="218" y="108" fill="#171717" font-family="Manrope, Helvetica, sans-serif" font-size="68" font-weight="700" letter-spacing="-3">PayeeLock</text>
+</svg>
