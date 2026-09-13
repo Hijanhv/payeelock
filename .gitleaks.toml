@@ -8,6 +8,21 @@ regexes = [
 ]
 
 [[allowlists]]
+description = "Public Sepolia workspace entry points, deployment transactions, and the documented Anvil test key"
+regexes = [
+  # Deployed factory and trial token addresses, plus their creation transactions.
+  '''0xf76802b72f97c21da6d2934034061f06d0eefd15''',
+  '''0x8c9270053298bcfdb77a73c27f65ad9b53250066''',
+  '''0xb0d02ac91f3bcab07fd73ca98b0bb55887ff939be2b1b8719e3f2fa99c3cb6e9''',
+  '''0x77165c46f176b813d48fef4201e749cdefed95fc849b40499b9938dba001b459''',
+  # Anvil's published default accounts. These keys are public by design and
+  # only ever fund throwaway chains started by the local test runners.
+  '''0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80''',
+  '''0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d''',
+  '''0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a''',
+]
+
+[[allowlists]]
 description = "Generated, vendored, local, and submission-only files"
 paths = [
   '''(^|/)\.git/''',
