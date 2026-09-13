@@ -4,6 +4,7 @@ import { useEffect, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { BrandMark } from '@/components/graphics/brand';
 import { Icon } from '@/components/graphics/icons';
+import { PayeeLockWorkspace } from '@/components/payeelock-workspace';
 import type { PayeeLockCase } from '@/lib/payeelock-case';
 
 const money = (value: string | number) =>
@@ -79,23 +80,32 @@ function Receipt({ data, active }: { data: PayeeLockCase; active: number }) {
   );
 }
 
-export function PayeeLockDashboard({ data }: { data: PayeeLockCase }) {
+export function PayeeLockDashboard({
+  data,
+  initialMode,
+  initialStep,
+  initialView,
+}: {
+  data: PayeeLockCase;
+  initialMode: 'review' | 'use';
+  initialStep: number;
+  initialView: string;
+}) {
   const router = useRouter();
-  const [active, setActive] = useState(0);
-  const [tab, setTab] = useState('case');
-  const [receiptOpen, setReceiptOpen] = useState(false);
+  const [mode, setMode] = useState<'review' | 'use'>(initialMode);
+  const [active, setActive] = useState(initialStep - 1);
+  const [tab, setTab] = useState(initialView);
+  const [receiptOpen, setReceiptOpen] = useState(initialStep === 3);
   const [eventFilter, setEventFilter] = useState('All events');
   const [refreshing, startRefresh] = useTransition();
 
-  useEffect(() => {
-    const search = new URLSearchParams(window.location.search);
-    const step = Number(search.get('step'));
-    if (step >= 1 && step <= 7 && Number.isInteger(step)) {
-      setActive(step - 1);
-      setReceiptOpen(step === 3);
-    }
-    if (['evidence', 'permissions'].includes(search.get('view') || '')) setTab(search.get('view')!);
-  }, []);
+  function selectMode(next: 'review' | 'use') {
+    setMode(next);
+    const url = new URL(window.location.href);
+    if (next === 'use') url.searchParams.set('mode', 'use');
+    else url.searchParams.delete('mode');
+    window.history.replaceState({}, '', url);
+  }
 
   function select(index: number) {
     setActive(index);
@@ -137,27 +147,40 @@ export function PayeeLockDashboard({ data }: { data: PayeeLockCase }) {
             <p className="lede">Pause an unsafe wallet. Recover unpaid invoices together.</p>
           </div>
         </div>
-        <div className="party-row">
-          <span>
-            <strong>Meridian Labs</strong> Buyer
-          </span>
-          <Icon name="arrow" size={19} />
-          <span>
-            <strong>Harbor Systems</strong> Cloud & security supplier
-          </span>
-        </div>
-        <nav className="tabs" aria-label="Workspace views">
-          {[
-            ['case', 'Case review'],
-            ['evidence', 'Live evidence'],
-            ['permissions', 'Permissions'],
-          ].map(([id, label]) => (
-            <button key={id} aria-pressed={tab === id} onClick={() => setTab(id)}>
-              {label}
-            </button>
-          ))}
+        {mode === 'review' && (
+          <div className="party-row">
+            <span>
+              <strong>Meridian Labs</strong> Buyer
+            </span>
+            <Icon name="arrow" size={19} />
+            <span>
+              <strong>Harbor Systems</strong> Cloud & security supplier
+            </span>
+          </div>
+        )}
+        <nav className="mode-switch" aria-label="App mode">
+          <button aria-pressed={mode === 'review'} onClick={() => selectMode('review')}>
+            Review case
+          </button>
+          <button aria-pressed={mode === 'use'} onClick={() => selectMode('use')}>
+            Use PayeeLock
+          </button>
         </nav>
-        {tab === 'case' && (
+        {mode === 'use' && <PayeeLockWorkspace />}
+        {mode === 'review' && (
+          <nav className="tabs" aria-label="Workspace views">
+            {[
+              ['case', 'Case review'],
+              ['evidence', 'Live evidence'],
+              ['permissions', 'Permissions'],
+            ].map(([id, label]) => (
+              <button key={id} aria-pressed={tab === id} onClick={() => setTab(id)}>
+                {label}
+              </button>
+            ))}
+          </nav>
+        )}
+        {mode === 'review' && tab === 'case' && (
           <div className="case-layout">
             <nav className="journey" aria-label="Case events">
               <p>Review the case</p>
@@ -301,7 +324,7 @@ export function PayeeLockDashboard({ data }: { data: PayeeLockCase }) {
             </section>
           </div>
         )}
-        {tab === 'evidence' && (
+        {mode === 'review' && tab === 'evidence' && (
           <section className="evidence-view">
             <div className="section-heading">
               <div className="graph-heading">
@@ -397,7 +420,7 @@ export function PayeeLockDashboard({ data }: { data: PayeeLockCase }) {
             </div>
           </section>
         )}
-        {tab === 'permissions' && (
+        {mode === 'review' && tab === 'permissions' && (
           <section className="permissions-view">
             <h2>Who can do what?</h2>
             <p className="explanation">
@@ -449,20 +472,31 @@ export function PayeeLockDashboard({ data }: { data: PayeeLockCase }) {
           </section>
         )}
         <footer>
-          <span>
-            {data.connected
-              ? 'Current chain balances · Settled case'
-              : 'Saved final balance snapshot'}{' '}
-            · Old wallet {money(data.oldBalance)} · New wallet {money(data.newBalance)} · Vault{' '}
-            {money(data.reserved)}
-          </span>
-          <a
-            href={`https://sepolia.etherscan.io/address/${data.contract}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            View contract <Icon name="external" size={13} />
-          </a>
+          {mode === 'review' ? (
+            <>
+              <span>
+                {data.connected
+                  ? 'Current chain balances · Settled case'
+                  : 'Saved final balance snapshot'}{' '}
+                · Old wallet {money(data.oldBalance)} · New wallet {money(data.newBalance)} · Vault{' '}
+                {money(data.reserved)}
+              </span>
+              <a
+                href={`https://sepolia.etherscan.io/address/${data.contract}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View the case vault <Icon name="external" size={13} />
+              </a>
+            </>
+          ) : (
+            <>
+              <span>Your workspace is separate from the Meridian case. Sepolia testnet only.</span>
+              <a href="https://sepolia.etherscan.io" target="_blank" rel="noreferrer">
+                Open Sepolia Etherscan <Icon name="external" size={13} />
+              </a>
+            </>
+          )}
         </footer>
       </main>
     </div>
