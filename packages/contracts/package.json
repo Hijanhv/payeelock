@@ -5,6 +5,11 @@
   "type": "module",
   "exports": {
     "./payeelock-abi": "./generated/payeelock.abi.ts",
+    "./payee-lock-factory-abi": "./generated/payee-lock-factory.abi.ts",
+    "./workspace-resolver-abi": "./generated/workspace-resolver.abi.ts",
+    "./payeelock-bytecode": "./generated/payeelock.bytecode.ts",
+    "./workspace-resolver-bytecode": "./generated/workspace-resolver.bytecode.ts",
+    "./test-usd-bytecode": "./generated/test-usd.bytecode.ts",
     "./test-resolver-abi": "./generated/test-resolver.abi.ts",
     "./test-usd-abi": "./generated/test-usd.abi.ts",
     "./test-support/anvil-proof": "./test-support/anvil-proof.ts",

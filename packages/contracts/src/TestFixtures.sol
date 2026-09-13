@@ -9,6 +9,11 @@ contract TestUSD is ERC20 {
         _mint(recipient, 1000000 * 1e6);
     }
 
+    /// @dev Open faucet so anyone can exercise a Sepolia workspace. Test asset only.
+    function mint(address recipient, uint256 amount) external {
+        _mint(recipient, amount);
+    }
+
     function decimals() public pure override returns (uint8) {
         return 6;
     }
