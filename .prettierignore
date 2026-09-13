@@ -5,7 +5,7 @@ node_modules
 packages/contracts/cache
 packages/contracts/lib
 packages/contracts/out
-packages/contracts/generated/*.abi.ts
+packages/contracts/generated
 packages/subgraph/build
 packages/subgraph/generated
 .runtime

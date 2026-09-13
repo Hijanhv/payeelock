@@ -14,12 +14,13 @@ The interface is a single live case, not an operator console and not a fake tran
 
 ## Active components
 
-| File                                              | Responsibility                                                      |
-| ------------------------------------------------- | ------------------------------------------------------------------- |
-| `apps/web/src/components/payeelock-dashboard.tsx` | Header, case review, invoices, evidence, permissions, and footer    |
-| `apps/web/src/components/graphics/brand.tsx`      | PayeeLock mark                                                      |
-| `apps/web/src/components/graphics/icons.tsx`      | Shared interface glyphs                                             |
-| `apps/web/src/lib/payeelock-case.ts`              | Server-side Sepolia state and evidence model                        |
-| `apps/web/src/app/globals.css`                    | Tokens, layout, motion, responsiveness, and reduced-motion behavior |
+| File                                              | Responsibility                                                                |
+| ------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `apps/web/src/components/payeelock-dashboard.tsx` | Header, mode switch, case review, invoices, evidence, permissions, and footer |
+| `apps/web/src/components/payeelock-workspace.tsx` | Wallet console cards, form fields, status messages, and workspace actions     |
+| `apps/web/src/components/graphics/brand.tsx`      | PayeeLock mark                                                                |
+| `apps/web/src/components/graphics/icons.tsx`      | Shared interface glyphs                                                       |
+| `apps/web/src/lib/payeelock-case.ts`              | Server-side Sepolia state and evidence model                                  |
+| `apps/web/src/app/globals.css`                    | Tokens, layout, motion, responsiveness, and reduced-motion behavior           |
 
 The palette is neutral paper white, near-black, and quiet gray. Manrope carries product copy and IBM Plex Mono is reserved for hashes and contract evidence. Color never substitutes for a written state label.

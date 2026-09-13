@@ -1,0 +1,30 @@
+{
+  "files.exclude": {
+    "**/.next": true,
+    "**/.runtime": true,
+    "**/.turbo": true,
+    "**/.vercel": true,
+    "**/node_modules": true,
+    "dist": true,
+    "packages/contracts/cache": true,
+    "packages/contracts/lib": true,
+    "packages/contracts/out": true,
+    "packages/subgraph/build": true,
+    "packages/subgraph/generated": true,
+    "tmp": true
+  },
+  "search.exclude": {
+    "**/.next": true,
+    "**/.runtime": true,
+    "**/.turbo": true,
+    "**/.vercel": true,
+    "**/node_modules": true,
+    "dist": true,
+    "packages/contracts/cache": true,
+    "packages/contracts/lib": true,
+    "packages/contracts/out": true,
+    "packages/subgraph/build": true,
+    "packages/subgraph/generated": true,
+    "tmp": true
+  }
+}

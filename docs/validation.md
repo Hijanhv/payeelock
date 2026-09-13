@@ -5,7 +5,7 @@ Validated on September 13, 2026 against the current source and live Sepolia depl
 | Check                          | Result                                                                                                                                                  |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `npm run repo:check`           | Three workspace boundaries, naming, empty paths, retired files, local links, environment keys, and deployment metadata passed                           |
-| `npm test`                     | 17 passed, 0 failed; partial-payment fuzz test ran 512 cases                                                                                            |
+| `npm test`                     | 23 passed, 0 failed; partial-payment fuzz test ran 512 cases; factory ownership and resolver authority covered                                          |
 | `npm run test:e2e`             | 10 direct-chain lifecycle assertions passed                                                                                                             |
 | `npm run typecheck`            | Passed                                                                                                                                                  |
 | `npm run build`                | Turbo built the contracts, Subgraph, and optimized Next.js 16 application successfully                                                                  |
@@ -18,7 +18,9 @@ Validated on September 13, 2026 against the current source and live Sepolia depl
 | Production deployment          | Vercel built the `apps/web` workspace and [`payeelock-sentinel.vercel.app`](https://payeelock-sentinel.vercel.app) returned 200 with live Sepolia state |
 | The Graph Studio               | 1 supplier, 3 invoices, 13 PayeeLock events, 9 ENS events; no indexing errors                                                                           |
 | Responsive production UI       | 390 px viewport, document width 390 px, final settlement visible                                                                                        |
-| Submission walkthrough         | 3:58 H.264/AAC export, 1280×880, 24 evidence-synced scenes, captions, native macOS cursor artwork                                                       |
+| Walkthrough preflight          | 3:56.68 H.264/AAC export, 1280×880, 19 evidence-synced scenes, captions, natural 1.00× playback, native macOS cursor artwork                            |
+| Public workspace factory       | `0xf768…fd15` deployed to Sepolia; a live `createWorkspace` call produced vault `0x4892…6287` owned by the caller                                       |
+| Workspace browser flow         | 8 local checks replaying the shipped bytecode, ABIs, and EIP-712 types from deployment through final settlement                                         |
 
 The full development dependency audit reports advisories inherited through `@graphprotocol/graph-cli@0.98.1`, which is the current published Graph CLI version. It is used only to compile and deploy trusted local Subgraph sources and is excluded from the production dependency audit.
 
@@ -42,6 +44,8 @@ The runner writes exact local receipts to `.runtime/e2e-result.json`. That direc
 
 Reverted receipts are product evidence, not test noise. The Sepolia case deliberately broadcasts both an unauthorized ENS address edit and an old payment after recovery. Their failed status proves the relevant boundaries onchain.
 
-## Video acceptance
+## Video preflight
 
-The final walkthrough was rendered from the final app in an isolated background instance of installed Google Chrome. Its 24-scene storyboard passes the automated evidence and pacing audit. A contact-sheet review confirms that the matching balances, receipts, permissions, recovery state, and Graph filters are visible with their narration. The narration consists of 59 separately generated sentence files with 35 file-boundary pauses; editing cannot introduce a pause inside a word. Fish S2-Pro uses restrained scene-level delivery cues, and the complete synchronized edit receives one uniform 1.20× speed change. Local Whisper `base.en` confirmed the critical amounts and the zero-token stale-payment result. The cursor audit reports 65 varied purposeful moves, four eased scrolls, 41 settling corrections, and a movement-duration standard deviation of 0.189 seconds.
+The walkthrough was captured from the final app in an isolated background instance of installed Google Chrome. The current 19-scene cut keeps the partial payment, ENS permission failure, Privy freeze, bilateral recovery, stale-payment rejection, settlement, and live Graph evidence. It runs for 3 minutes 56.68 seconds at natural 1.00× playback; the edit removes whole redundant scenes and does not use `setpts` or `atempo` acceleration.
+
+The current local narration is a synthetic timing preview and is not eligible for ETHGlobal submission. ETHGlobal's published video rules prohibit text-to-speech and AI voiceover. The submitted upload must replace it with the builder's own narration while keeping the verified natural-speed picture cut. The source capture's cursor audit reports 65 varied purposeful moves, four eased scrolls, 41 settling corrections, and a movement-duration standard deviation of 0.189 seconds.

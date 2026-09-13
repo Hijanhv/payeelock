@@ -6,7 +6,9 @@
 
 <p align="center">
   <a href="https://payeelock-sentinel.vercel.app">Live app</a> ·
+  <a href="https://payeelock-sentinel.vercel.app/?mode=use">Create a vault</a> ·
   <a href="docs/demo.md">Demo guide</a> ·
+  <a href="docs/submission.md">Submission draft</a> ·
   <a href="#verified-sepolia-case">Verified case</a> ·
   <a href="#how-recovery-works">How it works</a> ·
   <a href="#run-locally">Run locally</a> ·
@@ -73,7 +75,13 @@ The machine-readable evidence bundle is [`deployments/sepolia-proof.json`](deplo
 | Final settlement      | [Confirmed transaction](https://sepolia.etherscan.io/tx/0x9a7b034b92d78de50cc8e106ec7689d3803a08521717d0872123f9a37554270d)   |
 | Indexed history       | [Live Subgraph Studio deployment](https://thegraph.com/studio/subgraph/payeelock-sentinel/)                                   |
 
-The public app is a read-only case review. Its controls move between already-mined events; they never submit a transaction. The app fetches receipts and current balances from Sepolia, while the evidence view queries the deployed Subgraph.
+The public app has two modes. **Use PayeeLock** is the product: connect a wallet and the page deploys your own vault, where your wallet is the buyer. You register a supplier, prefund an invoice, pay it with a signed authorization, pause the supplier, and complete bilateral recovery. **Review case** is the read-only walkthrough of the completed Meridian Labs and Harbor Systems case; its controls move between already-mined events and never submit a transaction.
+
+Each workspace is its own vault. `BUYER` is fixed at construction, so your vault is the only one your wallet can fund, pause, and settle. The Meridian deployment is one such vault, kept as the verified example; it is not shared custody.
+
+A live example workspace created through the public factory is vault [`0x4892…6287`](https://sepolia.etherscan.io/address/0x48926b53983Fc9b6c9433903298e1a14eD6d6287) with resolver [`0xF556…6dAE`](https://sepolia.etherscan.io/address/0xF556ac7e5d77C6E79e4d6996F628B2768a7D6dAE).
+
+The verified case uses a Privy guardian under a default-deny policy. A workspace you create in the browser starts with your own wallet as buyer, guardian, and recovery signer, which you can reassign with `setGuardian` and `setExecutor`.
 
 ## How recovery works
 
@@ -142,7 +150,11 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Set `SEPOLIA_RPC_URL` in `.env.local`, then open [http://127.0.0.1:3126](http://127.0.0.1:3126). The app does not require a browser wallet because it reviews a completed public case.
+Set `SEPOLIA_RPC_URL` in `.env.local`, then open [http://127.0.0.1:3126](http://127.0.0.1:3126). The case review needs no wallet. The workspace flow needs an injected Ethereum wallet on Sepolia, because every action is a transaction you sign.
+
+Open [http://127.0.0.1:3126/?mode=use](http://127.0.0.1:3126/?mode=use) to go straight to the workspace. With the factory configured, creating a workspace is one transaction that deploys your vault and its payout resolver. Then mint test dollars, register a supplier, prefund an invoice, and pay it.
+
+`PayeeLockFactory` is deployed on Sepolia at [`0xf768…fd15`](https://sepolia.etherscan.io/address/0xf76802b72f97c21da6d2934034061f06d0eefd15) and creates the vault and its resolver in one transaction with the caller as buyer. A public open-mint test token at [`0x8c92…0066`](https://sepolia.etherscan.io/address/0x8c9270053298bcfdb77a73c27f65ad9b53250066) supplies trial funds. If those variables are absent, the app falls back to deploying a token, resolver, and vault directly from the visitor's wallet.
 
 ### Reproduce the protocol lifecycle
 
@@ -178,19 +190,23 @@ Commands that query Privy, The Graph, or Sepolia require the corresponding priva
 - Fee-on-transfer assets are rejected through exact balance-delta checks.
 - The guardian has no payment, migration, cancellation, withdrawal, or unfreeze authority.
 
-The Foundry suite contains 17 tests, including 512 fuzz cases for partial-payment accounting. The isolated end-to-end runner adds ten lifecycle assertions against fresh local deployments.
+The Foundry suite contains 23 tests, including 512 fuzz cases for partial-payment accounting, factory ownership isolation, resolver authority separation, and a full factory workspace lifecycle. The isolated end-to-end runner adds ten lifecycle assertions against fresh local deployments.
 
 ## Repository map
 
 ```text
 apps/
-  web/                          deployable Next.js case review
-    src/                        routes, components, and live read model
+  web/                          deployable Next.js product and case review
+    src/components/payeelock-workspace.tsx   wallet-driven vault console
+    src/components/payeelock-dashboard.tsx   read-only case review
+    src/lib/payeelock-case.ts     server-side Sepolia and Subgraph read model
     public/                     browser-served integration marks
 packages/
   contracts/                    Foundry protocol workspace
     src/PayeeLock.sol           payment and recovery protocol
-    test/PayeeLock.t.sol        unit, adversarial, replay, and fuzz tests
+    src/PayeeLockFactory.sol    permissionless vault and resolver factory
+    src/WorkspaceResolver.sol   resolver for vaults without an ENSv2 name
+    test/                       unit, adversarial, replay, fuzz, and factory tests
     generated/                  committed TypeScript ABI modules
     test-support/               isolated lifecycle controller and typed data
   subgraph/                     Graph workspace
@@ -208,7 +224,9 @@ docs/
   demo.md                      walkthrough production and disclosure notes
   design-system.md             interface language and visual rules
   integration-evidence.md      public ENSv2, Privy, and Graph evidence
+  ai-use.md                    exact development-assistance disclosure
   provenance.md                dependencies, prior art, and asset sources
+  submission.md                ETHGlobal form copy and final checklist
   threat-model.md              enforced assumptions and known limits
   validation.md                reproducible checks and observed results
   assets/                      project diagrams and sourced integration marks
@@ -233,7 +251,7 @@ Tests prove the implemented cases; they are not a substitute for an audit.
 
 ## Development disclosure
 
-The product, contracts, interface, diagrams, and tests were developed for ETHOnline 2026 with AI-assisted research and coding under the builder's direction. No previous winner's project-specific code was copied. [`docs/provenance.md`](docs/provenance.md) records the repositories and products reviewed during development.
+The product, contracts, interface, diagrams, and tests were developed for ETHOnline 2026 with AI-assisted research and coding under the builder's direction. No previous winner's project-specific code was copied. [`docs/ai-use.md`](docs/ai-use.md) lists where assistance was used, and [`docs/provenance.md`](docs/provenance.md) records the repositories and products reviewed during development.
 
 The earlier ERC-8004 experiment is not a dependency, prize target, or product claim. Its already-mined Sepolia registration remains historical onchain evidence, while the submission architecture relies only on PayeeLock, ENSv2, Privy, The Graph, and Ethereum.
 

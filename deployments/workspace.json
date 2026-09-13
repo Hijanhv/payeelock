@@ -1,0 +1,12 @@
+{
+  "network": "Ethereum Sepolia",
+  "chainId": 11155111,
+  "factory": "0xf76802b72f97c21da6d2934034061f06d0eefd15",
+  "testToken": "0x8c9270053298bcfdb77a73c27f65ad9b53250066",
+  "deployer": "0x96AE4c8214F384e81e3C275836EE4088132B2Bf7",
+  "verifiedAtBlock": 11694471,
+  "transactions": {
+    "testTokenDeployment": "0xb0d02ac91f3bcab07fd73ca98b0bb55887ff939be2b1b8719e3f2fa99c3cb6e9",
+    "factoryDeployment": "0x77165c46f176b813d48fef4201e749cdefed95fc849b40499b9938dba001b459"
+  }
+}
